@@ -142,8 +142,7 @@ public class ImageHandler {
 
     //Saves image to the specified destination file.
     public boolean saveImage(ImageCapture imageCapture){
-
-        //NEED TO ADD AN IF STATEMENT TO CHECK WHETHER THE FILE HAS ALREADY BEEN SAVED. I ALSO NEED TO CHECK WHETHER THE DIRECTORY EXISTS.
+     
         if(!imageCapture.isSaved() && getDirectoryDefined()){
             
             File imageFile = new File(destinationFile + "\\" + imageCapture.getFileName() + "." + imageCapture.getFileExtension());
