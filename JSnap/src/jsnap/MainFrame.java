@@ -1,4 +1,3 @@
-
 package jsnap;
 
 import java.awt.BorderLayout;
