@@ -6,3 +6,5 @@ or choose to keep the ones you like.
 It allows you to rename them and choose the destination folder in which the application will save them.
 
 The application uses the jNativeHook library for global keystrokes, to capture the PRINTSCREEN key.
+
+The .jar executable of the application can be found in the 'dist' directory.
