@@ -90,6 +90,9 @@ public class MainFrame extends JFrame implements NativeKeyListener{
 
     //Contructor
     public MainFrame(){
+        
+        //Sets the launch icon.
+        this.setIconImage(new ImageIcon("./res/Jsnap_icon.png").getImage());
 
         //Creates a new event dispatcher for the swing components.
         GlobalScreen.setEventDispatcher(new SwingDispatchService());
