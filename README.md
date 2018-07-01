@@ -8,3 +8,7 @@ It allows you to rename them and choose the destination folder in which the appl
 The application uses the jNativeHook library for global keystrokes, to capture the PRINTSCREEN key.
 
 The .jar executable of the application can be found in the 'dist' directory.
+
+Application screenshot:
+
+![alt text](https://github.com/VasilisG/JSnap---Screenshot-capture-in-Java/blob/master/Jsnap_screenshot.png)
