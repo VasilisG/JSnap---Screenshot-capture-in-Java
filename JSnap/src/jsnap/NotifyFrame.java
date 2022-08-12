@@ -54,11 +54,12 @@ public class NotifyFrame extends JFrame {
 
         panel = new JPanel();
 
-        label = new JLabel("There are unsaved images in the application.");
+        label = new JLabel(LangManager.getString("label_there_is_unsaved_images_warning",
+        		"There are unsaved images in the application."));
 
-        saveButton = new JButton("Save images");
-        discardButton = new JButton("Discard images");
-        cancelButton = new JButton("Cancel");
+        saveButton = new JButton(LangManager.getString("button_save_images", "Save images"));
+        discardButton = new JButton(LangManager.getString("button_discard_images", "Discard images"));
+        cancelButton = new JButton(LangManager.getString("button_cancel", "Cancel"));
     }
 
     //Method that adds all components to main panel

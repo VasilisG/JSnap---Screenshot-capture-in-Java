@@ -12,8 +12,10 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -24,6 +26,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
+
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.jnativehook.dispatcher.SwingDispatchService;
@@ -91,6 +94,9 @@ public class MainFrame extends JFrame implements NativeKeyListener{
     //Contructor
     public MainFrame(){
         
+    	//Initialize language manager
+    	LangManager.initialize(this);
+    	
         //Sets the launch icon.
         this.setIconImage(new ImageIcon("./res/Jsnap_icon.png").getImage());
 
@@ -139,40 +145,40 @@ public class MainFrame extends JFrame implements NativeKeyListener{
     */
     public void initComponents(){
 
-        infoLabel = new JLabel("Image name:          ");
+        infoLabel = new JLabel(LangManager.getString("label_image_name", "Image name:          "));
 
         infoField = new JTextField(30);
         infoField.setEditable(false);
 
-        directoryLabel = new JLabel("Current directory: ");
+        directoryLabel = new JLabel(LangManager.getString("label_current_directory", "Current directory: "));
 
         directoryField = new JTextField(30);
         directoryField.setEditable(false);
         directoryField.setText(imageHandler.getDestinationFileString());
 
-        thumbLabel = new JLabel("  Thumbnails");
-        thumbLabel.setToolTipText("A list with thumbnails of all screenshots."
-                + " Click on a thumbnail to view the screenshot.");
+        thumbLabel = new JLabel(LangManager.getString("label_thumbnails", "  Thumbnails"));
+        thumbLabel.setToolTipText(LangManager.getString("tooltip_thumbnails", "A list with thumbnails of all screenshots."
+                + " Click on a thumbnail to view the screenshot."));
 
         buttonListener = new ButtonListener();
 
-        renameButton = new JButton("Rename image");
+        renameButton = new JButton(LangManager.getString("button_rename_image", "Rename image"));
         renameButton.setEnabled(false);
         renameButton.addActionListener(buttonListener);
 
-        saveButton = new JButton("Save");
+        saveButton = new JButton(LangManager.getString("button_save", "Save"));
         saveButton.setEnabled(false);
         saveButton.addActionListener(buttonListener);
 
-        saveAllButton = new JButton("Save All");
+        saveAllButton = new JButton(LangManager.getString("button_save_all", "Save All"));
         saveAllButton.setEnabled(false);
         saveAllButton.addActionListener(buttonListener);
 
-        deleteButton = new JButton("Delete");
+        deleteButton = new JButton(LangManager.getString("button_delete", "Delete"));
         deleteButton.setEnabled(false);
         deleteButton.addActionListener(buttonListener);
 
-        setDirectoryButton = new JButton("Set Directory");
+        setDirectoryButton = new JButton(LangManager.getString("button_set_directory", "Set Directory"));
         setDirectoryButton.addActionListener(buttonListener);
     }
 
@@ -436,14 +442,14 @@ public class MainFrame extends JFrame implements NativeKeyListener{
                 if(!imageHandler.saveImage(imageHandler.getImageCaptures().get(imageHandler.getCurrentIndex()))){
                     JOptionPane.showMessageDialog(mainFrame,"File already exists or missing destination directory. Please provide a different name or set a directory.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-                else JOptionPane.showMessageDialog(mainFrame,"Image saved.", "Update", JOptionPane.INFORMATION_MESSAGE);
+                else JOptionPane.showMessageDialog(mainFrame,LangManager.getString("onsuccess_image_saved", "Image saved."), "Update", JOptionPane.INFORMATION_MESSAGE);
             }
             /////////////////////////////////////
 
             //If user clicks the "save all" button.
             if(event.getSource() == saveAllButton){
                 imageHandler.saveAllImages();
-                JOptionPane.showMessageDialog(mainFrame,"Images saved.", "Update", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(mainFrame,LangManager.getString("onsuccess_images_saved", "Images saved."), "Update", JOptionPane.INFORMATION_MESSAGE);
             }
             /////////////////////////////////////
 
@@ -482,9 +488,8 @@ public class MainFrame extends JFrame implements NativeKeyListener{
             //If user clicks the "set directory" button.
             if(event.getSource() == setDirectoryButton){
 
-                JOptionPane.showMessageDialog(mainFrame,
-                        "Changing directory will only apply on images that are not saved.",
-                        "Warning",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(mainFrame,LangManager.getString("onclick_button_set_directory",
+                		"Changing directory will only apply on images that are not saved."), "Warning", JOptionPane.WARNING_MESSAGE);
 
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -537,7 +542,8 @@ public class MainFrame extends JFrame implements NativeKeyListener{
             try {
                 GlobalScreen.registerNativeHook();
             } catch (NativeHookException ex) {
-                JOptionPane.showMessageDialog(mainFrame, "Could not create native keyboard hook.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(mainFrame, LangManager.getString("onerror_create_native_keyboard_hook",
+                		"Could not create native keyboard hook."), "Error", JOptionPane.ERROR_MESSAGE);
                 System.exit(1);
             }
 

@@ -55,9 +55,9 @@ public class RenameFrame extends JFrame{
 
         panel = new JPanel();
 
-        oldNameLabel = new JLabel("Current name: ");
+        oldNameLabel = new JLabel(LangManager.getString("label_current_name", "Current name: "));
 
-        newNameLabel = new JLabel("     New name:      ");
+        newNameLabel = new JLabel(LangManager.getString("label_new_name", "     New name:      "));
         newNameLabel.setHorizontalAlignment(JLabel.RIGHT);
 
         oldNameField = new JTextField();
@@ -70,10 +70,10 @@ public class RenameFrame extends JFrame{
 
         buttonListener = new ButtonListener();
 
-        renameButton = new JButton("Rename");
+        renameButton = new JButton(LangManager.getString("button_rename", "Rename"));
         renameButton.addActionListener(buttonListener);
 
-        cancelButton = new JButton("Cancel");
+        cancelButton = new JButton(LangManager.getString("button_cancel", "Cancel"));
         cancelButton.addActionListener(buttonListener);
 
         panel.add(oldNameLabel);
@@ -102,7 +102,8 @@ public class RenameFrame extends JFrame{
 
                 if(!isNameValid(newNameField.getText())){
                     JOptionPane.showMessageDialog(panel,
-                            "Invalid name (Either empty field or illegal character with the name.)",
+                            LangManager.getString("onerror_button_rename", "Invalid name (Either empty field or illegal "
+                            		+ "character with the name.)"),
                             "Error",
                             JOptionPane.ERROR_MESSAGE);
 
@@ -111,7 +112,7 @@ public class RenameFrame extends JFrame{
 
                 else{
                     imageCapture.setFileName(newNameField.getText());
-                    JOptionPane.showMessageDialog(panel, "File successfully renamed.", "Update", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(panel, LangManager.getString("onsuccess_button_rename", "File successfully renamed."), "Update", JOptionPane.INFORMATION_MESSAGE);
                     mainFrame.getInfoField().setText(imageCapture.getFileName());
                     dispose();
                 }
